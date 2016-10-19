@@ -1,7 +1,7 @@
 #!bin/bash
 sudo su
 cd
-wget https://raw.githubusercontent.com/arijitbardhan/myscripts/master/install-mysql.sh?_sm_au_=itHP6JqWbQ1F7f6Q
+wget https://raw.githubusercontent.com/DevOps-Mindtree/Cloud-Bag-installations/master/install-mysql.sh?_sm_au_=irVBVVM21n4WDRtP
 #installing mysql
 sh install-mysql.sh?_sm_au_=itHP6JqWbQ1F7f6Q
 wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.1.zip
