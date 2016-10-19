@@ -4,10 +4,10 @@ cd
 wget https://raw.githubusercontent.com/arijitbardhan/myscripts/master/install-mysql.sh?_sm_au_=itHP6JqWbQ1F7f6Q
 #installing mysql
 sh install-mysql.sh?_sm_au_=itHP6JqWbQ1F7f6Q
-wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.6.zip
+wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.1.zip
 apt-get install -y unzip
-unzip sonarqube-5.6.zip
-mv sonarqube-5.6 /opt/sonar
+unzip sonarqube-6.1.zip
+mv sonarqube-6.1 /opt/sonar
 ip="$(ifconfig | grep -A 1 'eth0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
 echo "sonar.jdbc.username=sonar" >> /opt/sonar/conf/sonar.properties
 echo "sonar.jdbc.password=sonar" >> /opt/sonar/conf/sonar.properties
