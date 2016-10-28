@@ -1,36 +1,35 @@
-#installing Apache HTTP2
-sudo apt-get update
-sudo apt-get install -y apache2
-sudo useradd nagios
-sudo groupadd nagcmd
-sudo usermod -a -G nagcmd nagios
-sudo apt-get install -y build-essential libgd2-xpm-dev openssl libssl-dev xinetd apache2-utils unzip
-curl -L -O https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.1.1.tar.gz
-tar xvf nagios-*.tar.gz
-cd nagios-*
-./configure --with-nagios-group=nagios --with-command-group=nagcmd 
+sudo su
+apt-get update -y
+apt-get install wget apache2 apache2-utils php5 libapache2-mod-php5 build-essential libgd2-xpm-dev unzip -y
+service apache2 start
+useradd nagios -p nagios123
+groupadd nagcmd
+usermod -a -G nagcmd nagios
+usermod -a -G nagcmd www-data
+cd /opt/
+wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.2.2.tar.gz
+tar xzf nagios-4.2.2.tar.gz
+cd nagios-4.2.2
+./configure --with-command-group=nagcmd
 make all
-sudo make install
-sudo make install-commandmode
-sudo make install-init
-sudo make install-config
-sudo /usr/bin/install -c -m 644 sample-config/httpd.conf /etc/apache2/sites-available/nagios.conf
-sudo usermod -G nagcmd www-data
-cd ~
-curl -L -O http://nagios-plugins.org/download/nagios-plugins-2.1.1.tar.gz
-tar xvf nagios-plugins-*.tar.gz
-cd nagios-plugins-*
-./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl
+make install
+make install-init
+make install-config
+make install-commandmode
+/usr/bin/install -c -m 644 sample-config/httpd.conf /etc/apache2/sites-enabled/nagios.conf
+ls -l /etc/apache2/sites-enabled/
+service apache2 restart
+htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin password123
+a2enconf nagios
+a2enmod cgi
+service apache2 restart
+cd /opt
+wget https://www.nagios-plugins.org/download/nagios-plugins-2.1.2.tar.gz
+tar xzf nagios-plugins-2.1.2.tar.gz
+cd nagios-plugins-2.1.2
+./configure --with-nagios-user=nagios --with-nagios-group=nagios
 make
-sudo make install
-tar xvf nrpe-*.tar.gz
-cd nrpe-*
-./configure --enable-command-args --with-nagios-user=nagios --with-nagios-group=nagios --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu
-make all
-sudo make install
-sudo make install-xinetd
-sudo make install-daemon-config
-
-sudo service xinetd restart
-echo 'cfg_dir=/usr/local/nagios/etc/servers' >> /usr/local/nagios/etc/nagios.cfg
-sudo mkdir /usr/local/nagios/etc/servers
+make install
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+service nagios start
+ln -s /etc/init.d/nagios /etc/rcS.d/S99nagios
