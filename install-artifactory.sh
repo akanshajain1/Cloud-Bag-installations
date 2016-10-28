@@ -1,4 +1,4 @@
-sudo su
+#sudo su
 /usr/bin/apt-get update -y 
 add-apt-repository ppa:openjdk-r/ppa 
 apt-get update -y 
