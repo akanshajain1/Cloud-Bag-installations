@@ -1,4 +1,4 @@
-sudo su
+#sudo su
 apt-get update -y 
 apt-get install gcc -y
 apt-get install make -y
