@@ -1,4 +1,4 @@
-sudo su
+# sudo su
 apt-get update -y
 apt-get install wget apache2 apache2-utils php5 libapache2-mod-php5 build-essential libgd2-xpm-dev unzip -y
 service apache2 start
