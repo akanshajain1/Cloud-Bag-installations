@@ -11,5 +11,5 @@ echo " " >> /opt/sonar/sonar/conf/sonar.properties
 echo "sonar.jdbc.username=sonar" >> /opt/sonar/sonar/conf/sonar.properties
 echo "sonar.jdbc.password=sonar" >> /opt/sonar/sonar/conf/sonar.properties
 echo "sonar.web.context=/sonar" >> /opt/sonar/sonar/conf/sonar.properties
-echo "sonar.jdbc.url=jdbc:mysql://10.0.3.7:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance" >> /opt/sonar/sonar/conf/sonar.properties 
+echo "sonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance" >> /opt/sonar/sonar/conf/sonar.properties 
 /opt/sonar/sonar/bin/linux-x86-64/sonar.sh start
