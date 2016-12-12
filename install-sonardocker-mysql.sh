@@ -19,7 +19,7 @@ echo "CREATE DATABASE sonar CHARACTER SET utf8 COLLATE utf8_general_ci; CREATE U
 
 /usr/bin/apt-get update -y
 wget -qO- https://get.docker.com/ | sh
-$ docker run -d --name sonarqube \
+docker run -d --name sonarqube \
     -p 9000:9000 -p 9092:9092 \
     -e SONARQUBE_JDBC_USERNAME=sonar \
     -e SONARQUBE_JDBC_PASSWORD=sonar \
