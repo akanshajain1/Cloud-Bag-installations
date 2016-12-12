@@ -11,8 +11,7 @@ sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my
 sudo service mysql restart
 echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'welcome123'; flush privileges;" | mysql -u root -pwelcome123
 echo "CREATE DATABASE sonar CHARACTER SET utf8 COLLATE utf8_general_ci; CREATE USER 'sonar' IDENTIFIED BY 'sonar';GRANT ALL PRIVILEGES ON sonar.* TO 'sonar'@'%' IDENTIFIED BY 'sonar'; GRANT ALL ON sonar.* TO 'sonar'@'localhost' IDENTIFIED BY 'sonar'; flush privileges;" | mysql -u root -pwelcome123
-IP_ADDR=sh curl ipecho.net/plain
-docker run --name nginx_devops -d -p 80:80 -e NGINX_ADDR=IP_ADDR -e JENKINS_ADDR=IP_ADDR -e SONAR_ADDR=IP_ADDR preetick/nginx-devops:v13
-docker run --name sonar -d -p 9000:9000 -e DB_USER=sonar -e DB_PWD=sonar -e DB_URL=127.0.0.1 -e DB_PORT=3306  preetick/sonar-devops:v18
+docker run --name nginx_devops -d -p 80:80 -e NGINX_ADDR=$1.southeastasia.cloudapp.azure.com -e JENKINS_ADDR=$1.southeastasia.cloudapp.azure.com -e SONAR_ADDR=$1.southeastasia.cloudapp.azure.com preetick/nginx-devops:v13
+docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 -e SONARQUBE_JDBC_USERNAME=sonar -e SONARQUBE_JDBC_PASSWORD=sonar -e SONARQUBE_JDBC_URL=jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance sonarqube
 apt-get update
 docker run --name jenkins  -p 8080:8080  jenkins --prefix=/jenkins
