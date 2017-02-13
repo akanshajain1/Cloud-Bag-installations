@@ -1,4 +1,4 @@
-wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.5.11/bin/apache-tomcat-8.5.11.tar.gz
+wget http://redrockdigimark.com/apachemirror/tomcat/tomcat-8/v8.5.11/bin/apache-tomcat-8.5.11.tar.gz
 tar xvzf apache-tomcat-8.5.11.tar.gz
 mv apache-tomcat-8.5.11 /opt/tomcat
 mkdir /opt/java
